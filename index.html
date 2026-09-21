@@ -10,69 +10,24 @@
 <title>Водний баланс</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap">
 <style>
-  /* ---------- Tokens ---------- */
   :root{
-    --bg:#eef6fd;
-    --bg-grad-1:#e3f2fe;
-    --bg-grad-2:#f4fbff;
-    --surface:#ffffff;
-    --surface-2:#f3f9ff;
-    --surface-3:#e8f3fe;
-    --ink:#0d2438;
-    --ink-2:#42627e;
-    --ink-3:#8199b0;
-    --line:#dcebf8;
-    --brand:#0ea5e9;
-    --brand-strong:#0284c7;
-    --brand-soft:#7dd3fc;
-    --aqua:#38bdf8;
-    --mint:#22d3ee;
-    --amber:#f4a944;
-    --coffee:#8b5e3c;
-    --grape:#a78bfa;
-    --good:#16a34a;
-    --shadow:0 10px 30px -12px rgba(9,84,140,.35);
-    --shadow-sm:0 4px 14px -8px rgba(9,84,140,.4);
-    --r-lg:26px;
-    --r-md:18px;
-    --r-sm:13px;
-    --tap:.996;
+    --bg:#eef6fd;--bg-grad-1:#e3f2fe;--bg-grad-2:#f4fbff;--surface:#ffffff;--surface-2:#f3f9ff;--surface-3:#e8f3fe;
+    --ink:#0d2438;--ink-2:#42627e;--ink-3:#8199b0;--line:#dcebf8;--brand:#0ea5e9;--brand-strong:#0284c7;--brand-soft:#7dd3fc;
+    --aqua:#38bdf8;--mint:#22d3ee;--amber:#f4a944;--coffee:#8b5e3c;--grape:#a78bfa;--good:#16a34a;
+    --shadow:0 10px 30px -12px rgba(9,84,140,.35);--shadow-sm:0 4px 14px -8px rgba(9,84,140,.4);
+    --r-lg:26px;--r-md:18px;--r-sm:13px;--tap:.996;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#081420;
-      --bg-grad-1:#0a1c2c;
-      --bg-grad-2:#07131f;
-      --surface:#0f2233;
-      --surface-2:#13293c;
-      --surface-3:#183246;
-      --ink:#eaf4fd;
-      --ink-2:#a6c1d6;
-      --ink-3:#6e8aa1;
-      --line:#1e3548;
-      --brand:#38bdf8;
-      --brand-strong:#7dd3fc;
-      --brand-soft:#1e4a63;
-      --shadow:0 16px 40px -18px rgba(0,0,0,.7);
-      --shadow-sm:0 6px 18px -10px rgba(0,0,0,.6);
+      --bg:#081420;--bg-grad-1:#0a1c2c;--bg-grad-2:#07131f;--surface:#0f2233;--surface-2:#13293c;--surface-3:#183246;
+      --ink:#eaf4fd;--ink-2:#a6c1d6;--ink-3:#6e8aa1;--line:#1e3548;--brand:#38bdf8;--brand-strong:#7dd3fc;--brand-soft:#1e4a63;
+      --shadow:0 16px 40px -18px rgba(0,0,0,.7);--shadow-sm:0 6px 18px -10px rgba(0,0,0,.6);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#081420;
-    --bg-grad-1:#0a1c2c;
-    --bg-grad-2:#07131f;
-    --surface:#0f2233;
-    --surface-2:#13293c;
-    --surface-3:#183246;
-    --ink:#eaf4fd;
-    --ink-2:#a6c1d6;
-    --ink-3:#6e8aa1;
-    --line:#1e3548;
-    --brand:#38bdf8;
-    --brand-strong:#7dd3fc;
-    --brand-soft:#1e4a63;
-    --shadow:0 16px 40px -18px rgba(0,0,0,.7);
-    --shadow-sm:0 6px 18px -10px rgba(0,0,0,.6);
+    --bg:#081420;--bg-grad-1:#0a1c2c;--bg-grad-2:#07131f;--surface:#0f2233;--surface-2:#13293c;--surface-3:#183246;
+    --ink:#eaf4fd;--ink-2:#a6c1d6;--ink-3:#6e8aa1;--line:#1e3548;--brand:#38bdf8;--brand-strong:#7dd3fc;--brand-soft:#1e4a63;
+    --shadow:0 16px 40px -18px rgba(0,0,0,.7);--shadow-sm:0 6px 18px -10px rgba(0,0,0,.6);
   }
 
   *{box-sizing:border-box}
@@ -80,66 +35,37 @@
   html,body{height:100%}
   html{-webkit-text-size-adjust:100%}
   img{max-width:100%}
-  body{
-    margin:0;
-    font-family:"Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
-    color:var(--ink);
-    background:
-      radial-gradient(120% 80% at 50% -10%, var(--bg-grad-1) 0%, var(--bg) 55%),
-      linear-gradient(180deg, var(--bg-grad-2), var(--bg));
-    background-attachment:fixed;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{margin:0;font-family:"Nunito","Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);
+    background:radial-gradient(120% 80% at 50% -10%, var(--bg-grad-1) 0%, var(--bg) 55%),linear-gradient(180deg, var(--bg-grad-2), var(--bg));
+    background-attachment:fixed;-webkit-font-smoothing:antialiased;}
   h1,h2,h3{font-family:"Baloo 2","Nunito",system-ui,sans-serif;margin:0;letter-spacing:-.01em}
   button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
   button:active{transform:scale(var(--tap))}
 
-  .app{
-    max-width:460px;margin:0 auto;min-height:100%;
-    display:flex;flex-direction:column;
-    padding:0 16px calc(94px + env(safe-area-inset-bottom,0px));
-  }
+  .app{max-width:460px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;
+    padding:0 16px calc(94px + env(safe-area-inset-bottom,0px));}
 
-  /* ---------- Header ---------- */
-  header{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:calc(18px + env(safe-area-inset-top,0px)) 4px 8px;
-  }
+  header{display:flex;align-items:center;justify-content:space-between;padding:calc(18px + env(safe-area-inset-top,0px)) 4px 8px;}
   .brand{display:flex;align-items:center;gap:10px}
-  .brand .drop{
-    width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
-    background:linear-gradient(160deg,var(--aqua),var(--brand-strong));
-    box-shadow:0 6px 14px -6px var(--brand);
-  }
+  .brand .drop{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
+    background:linear-gradient(160deg,var(--aqua),var(--brand-strong));box-shadow:0 6px 14px -6px var(--brand);}
   .brand h1{font-size:20px;font-weight:800}
   .brand small{display:block;font-size:11px;color:var(--ink-3);font-weight:700;letter-spacing:.02em}
-  .icon-btn{
-    width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
-    background:var(--surface);box-shadow:var(--shadow-sm);color:var(--ink-2);
-  }
-  .streak{
-    display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;
-    padding:9px 13px;border-radius:14px;background:var(--surface);box-shadow:var(--shadow-sm);
-    color:var(--brand-strong);
-  }
+  .icon-btn{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
+    background:var(--surface);box-shadow:var(--shadow-sm);color:var(--ink-2);}
+  .streak{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;padding:9px 13px;border-radius:14px;
+    background:var(--surface);box-shadow:var(--shadow-sm);color:var(--brand-strong);}
 
-  /* ---------- Hero ---------- */
-  .hero{
-    background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
-    padding:22px 20px 18px;margin-top:6px;position:relative;overflow:hidden;
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(90% 60% at 50% 0%, rgba(56,189,248,.10), transparent 60%);
-  }
+  .hero{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);
+    padding:22px 20px 18px;margin-top:6px;position:relative;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(90% 60% at 50% 0%, rgba(56,189,248,.10), transparent 60%);}
   .picker{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:2px}
-  .pk-btn{width:46px;height:46px;border-radius:15px;background:var(--surface-2);
-    display:grid;place-items:center;font-size:26px;font-weight:800;color:var(--brand-strong);
-    box-shadow:var(--shadow-sm)}
+  .pk-btn{width:46px;height:46px;border-radius:15px;background:var(--surface-2);display:grid;place-items:center;
+    font-size:26px;font-weight:800;color:var(--brand-strong);box-shadow:var(--shadow-sm)}
   .pk-btn:active{background:var(--surface-3)}
   .pk-amt{min-width:118px;text-align:center}
-  .pk-amt .n{font-family:"Baloo 2",sans-serif;font-size:46px;font-weight:800;line-height:1;
-    font-variant-numeric:tabular-nums;color:var(--ink)}
+  .pk-amt .n{font-family:"Baloo 2",sans-serif;font-size:46px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
   .pk-amt .u{font-size:12px;font-weight:800;color:var(--ink-3);letter-spacing:.03em;margin-top:2px}
 
   .glass-wrap{position:relative;width:172px;margin:8px auto 0;touch-action:none;cursor:pointer;
@@ -149,220 +75,143 @@
   .water{transition:y .85s cubic-bezier(.22,1,.36,1),height .85s cubic-bezier(.22,1,.36,1)}
   #waterTop{transition:cy .85s cubic-bezier(.22,1,.36,1)}
   .mascot{position:absolute;right:2px;bottom:4px;font-size:34px;line-height:1;
-    filter:drop-shadow(0 4px 6px rgba(14,165,233,.3));
-    transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+    filter:drop-shadow(0 4px 6px rgba(14,165,233,.3));transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
   .mascot.pop{transform:scale(1.3) rotate(-6deg)}
-  .pour{position:absolute;left:50%;top:6px;transform:translateX(-50%);
-    font-size:12px;font-weight:800;color:var(--brand-strong);
-    background:var(--surface);padding:4px 11px;border-radius:11px;box-shadow:var(--shadow-sm);
-    white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums}
+  .pour{position:absolute;left:50%;top:6px;transform:translateX(-50%);font-size:12px;font-weight:800;color:var(--brand-strong);
+    background:var(--surface);padding:4px 11px;border-radius:11px;box-shadow:var(--shadow-sm);white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums}
   .glass-info{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px}
-  .glass-info .gc{font-family:"Baloo 2",sans-serif;font-size:21px;font-weight:800;
-    font-variant-numeric:tabular-nums}
+  .glass-info .gc{font-family:"Baloo 2",sans-serif;font-size:21px;font-weight:800;font-variant-numeric:tabular-nums}
   .glass-info .gc span:last-child{color:var(--ink-3)}
-  .glass-info .gp{font-size:13px;font-weight:800;color:var(--brand-strong);
-    background:var(--surface-2);padding:4px 10px;border-radius:10px}
-  .hint{text-align:center;font-size:11.5px;font-weight:700;color:var(--ink-3);margin-top:9px;
-    display:flex;align-items:center;justify-content:center;gap:6px}
+  .glass-info .gp{font-size:13px;font-weight:800;color:var(--brand-strong);background:var(--surface-2);padding:4px 10px;border-radius:10px}
+  .hint{text-align:center;font-size:11.5px;font-weight:700;color:var(--ink-3);margin-top:9px;display:flex;align-items:center;justify-content:center;gap:6px}
   .glass-wrap:focus-visible{outline:none}
   .glass-wrap:focus-visible svg{filter:drop-shadow(0 0 0 3px var(--brand-soft))}
 
   .ring-wrap{position:relative;width:220px;height:220px;margin:4px auto 2px}
   .ring-wrap svg{transform:rotate(-90deg);display:block}
   .ring-bg{fill:none;stroke:var(--surface-3);stroke-width:16}
-  .ring-fg{fill:none;stroke:url(#grad);stroke-width:16;stroke-linecap:round;
-    transition:stroke-dashoffset .8s cubic-bezier(.22,1,.36,1)}
-  .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:3px;text-align:center}
-  .r-mascot{font-size:38px;line-height:1;filter:drop-shadow(0 4px 6px rgba(14,165,233,.25));
-    transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
-  .r-amount{font-family:"Baloo 2",sans-serif;font-size:34px;font-weight:800;line-height:1.05;
-    font-variant-numeric:tabular-nums}
+  .ring-fg{fill:none;stroke:url(#grad);stroke-width:16;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.22,1,.36,1)}
+  .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center}
+  .r-mascot{font-size:38px;line-height:1;filter:drop-shadow(0 4px 6px rgba(14,165,233,.25));transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+  .r-amount{font-family:"Baloo 2",sans-serif;font-size:34px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums}
   .r-amount small{font-size:16px;color:var(--ink-3);font-weight:700}
   .r-pct{font-size:13px;font-weight:800;color:var(--brand-strong);letter-spacing:.02em}
 
   .breakdown{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}
-  .chip{
-    display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:12px;
-    background:var(--surface-2);font-size:12.5px;font-weight:800;color:var(--ink-2);
-  }
+  .chip{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:12px;background:var(--surface-2);font-size:12.5px;font-weight:800;color:var(--ink-2);}
   .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
   .dot{width:9px;height:9px;border-radius:50%}
 
-  .section-t{font-size:13px;font-weight:800;color:var(--ink-3);text-transform:uppercase;
-    letter-spacing:.06em;margin:22px 4px 10px}
-  .types{display:flex;gap:8px;background:var(--surface);padding:6px;border-radius:16px;
-    box-shadow:var(--shadow-sm)}
-  .type{
-    flex:1;padding:11px 4px;border-radius:12px;font-size:14px;font-weight:800;color:var(--ink-2);
-    display:flex;flex-direction:column;align-items:center;gap:4px;transition:.18s;
-  }
-  .type[aria-pressed="true"]{background:var(--surface-3);color:var(--brand-strong);
-    box-shadow:inset 0 0 0 1.5px var(--brand-soft)}
+  .section-t{font-size:13px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;margin:22px 4px 10px}
+  .types{display:flex;gap:8px;background:var(--surface);padding:6px;border-radius:16px;box-shadow:var(--shadow-sm)}
+  .type{flex:1;padding:11px 4px;border-radius:12px;font-size:14px;font-weight:800;color:var(--ink-2);display:flex;flex-direction:column;align-items:center;gap:4px;transition:.18s;}
+  .type[aria-pressed="true"]{background:var(--surface-3);color:var(--brand-strong);box-shadow:inset 0 0 0 1.5px var(--brand-soft)}
 
   .card{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:18px 16px}
   .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
   .card-head h3{font-size:16px;font-weight:800}
   .card-head .sub{font-size:12px;color:var(--ink-3);font-weight:700}
   .chart{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:14px}
-  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;
-    justify-content:flex-end}
-  .bar-track{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;
-    position:relative}
-  .bar{width:70%;max-width:26px;border-radius:8px 8px 5px 5px;
-    background:linear-gradient(180deg,var(--aqua),var(--brand));
-    min-height:5px;transition:height .7s cubic-bezier(.22,1,.36,1);position:relative}
+  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end}
+  .bar-track{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;position:relative}
+  .bar{width:70%;max-width:26px;border-radius:8px 8px 5px 5px;background:linear-gradient(180deg,var(--aqua),var(--brand));min-height:5px;transition:height .7s cubic-bezier(.22,1,.36,1);position:relative}
   .bar.under{background:linear-gradient(180deg,var(--brand-soft),#bfe3fb)}
   .bar.today{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--brand-soft)}
-  .bar-goal{position:absolute;left:6%;right:6%;border-top:2px dashed var(--brand-soft);
-    pointer-events:none}
+  .bar-goal{position:absolute;left:6%;right:6%;border-top:2px dashed var(--brand-soft);pointer-events:none}
   .bar-lbl{font-size:11px;font-weight:800;color:var(--ink-3)}
   .bar-lbl.on{color:var(--brand-strong)}
   .bar-val{font-size:10px;font-weight:800;color:var(--ink-2);font-variant-numeric:tabular-nums}
 
   .hist{margin-top:8px;display:flex;flex-direction:column;gap:8px}
-  .hrow{
-    display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:var(--r-md);
-    padding:12px 14px;box-shadow:var(--shadow-sm);animation:slideIn .35s cubic-bezier(.22,1,.36,1)}
+  .hrow{display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:var(--r-md);padding:12px 14px;box-shadow:var(--shadow-sm);animation:slideIn .35s cubic-bezier(.22,1,.36,1)}
   @keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .hrow .hi{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;flex:none}
   .hrow .ht{flex:1;font-weight:800;font-size:14.5px}
   .hrow .ht small{display:block;color:var(--ink-3);font-weight:700;font-size:12px}
   .hrow .hv{font-weight:800;font-variant-numeric:tabular-nums;font-size:15px}
-  .hrow .del{width:34px;height:34px;border-radius:10px;color:var(--ink-3);display:grid;
-    place-items:center}
+  .hrow .del{width:34px;height:34px;border-radius:10px;color:var(--ink-3);display:grid;place-items:center}
   .hrow .del:hover{color:#ef4444;background:var(--surface-2)}
   .empty{text-align:center;color:var(--ink-3);font-weight:700;font-size:14px;padding:26px 10px}
   .empty .em{font-size:34px;display:block;margin-bottom:6px}
 
-  nav{
-    position:fixed;left:0;right:0;bottom:0;z-index:20;
-    display:flex;justify-content:center;
-    padding:0 16px calc(env(safe-area-inset-bottom,0px) + 12px);
-    pointer-events:none;
-  }
-  .navbar{
-    pointer-events:auto;display:flex;gap:4px;background:var(--surface);
-    border-radius:22px;box-shadow:var(--shadow);padding:8px;max-width:460px;width:100%;
-    border:1px solid var(--line);
-  }
-  .nav-btn{flex:1;padding:9px 0;border-radius:15px;display:flex;flex-direction:column;
-    align-items:center;gap:3px;color:var(--ink-3);font-size:11px;font-weight:800}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;padding:0 16px calc(env(safe-area-inset-bottom,0px) + 12px);pointer-events:none;}
+  .navbar{pointer-events:auto;display:flex;gap:4px;background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:8px;max-width:460px;width:100%;border:1px solid var(--line);}
+  .nav-btn{flex:1;padding:9px 0;border-radius:15px;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-3);font-size:11px;font-weight:800}
   .nav-btn .ni{width:23px;height:23px}
   .nav-btn.on{color:#fff;background:linear-gradient(160deg,var(--aqua),var(--brand-strong))}
 
   .view{animation:fade .3s ease}
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-  .modal-bg{position:fixed;inset:0;background:rgba(6,24,40,.5);backdrop-filter:blur(3px);
-    z-index:40;display:flex;align-items:flex-end;justify-content:center;padding:16px;
-    animation:fade .2s ease}
-  .modal{background:var(--surface);border-radius:24px;box-shadow:var(--shadow);width:100%;
-    max-width:428px;padding:22px 20px calc(20px + env(safe-area-inset-bottom,0px));
-    animation:sheet .32s cubic-bezier(.22,1,.36,1)}
+  .modal-bg{position:fixed;inset:0;background:rgba(6,24,40,.5);backdrop-filter:blur(3px);z-index:40;display:flex;align-items:flex-end;justify-content:center;padding:16px;animation:fade .2s ease}
+  .modal{background:var(--surface);border-radius:24px;box-shadow:var(--shadow);width:100%;max-width:428px;padding:22px 20px calc(20px + env(safe-area-inset-bottom,0px));animation:sheet .32s cubic-bezier(.22,1,.36,1)}
   @keyframes sheet{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}
   .modal h3{font-size:19px;margin-bottom:4px}
   .modal p{color:var(--ink-3);font-size:13px;font-weight:700;margin:0 0 16px}
-  .field{display:flex;align-items:center;gap:10px;background:var(--surface-2);border-radius:16px;
-    padding:6px 6px 6px 18px;margin-bottom:14px}
-  .field input{flex:1;border:none;background:none;font-family:"Baloo 2",sans-serif;
-    font-size:26px;font-weight:800;color:var(--ink);width:100%;outline:none;
-    font-variant-numeric:tabular-nums}
+  .field{display:flex;align-items:center;gap:10px;background:var(--surface-2);border-radius:16px;padding:6px 6px 6px 18px;margin-bottom:14px}
+  .field input{flex:1;border:none;background:none;font-family:"Baloo 2",sans-serif;font-size:26px;font-weight:800;color:var(--ink);width:100%;outline:none;font-variant-numeric:tabular-nums}
   .field .unit{font-weight:800;color:var(--ink-3);padding-right:12px}
   .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-  .preset{padding:9px 14px;border-radius:12px;background:var(--surface-2);font-weight:800;
-    font-size:14px;color:var(--ink-2)}
-  .preset.on{background:var(--surface-3);color:var(--brand-strong);
-    box-shadow:inset 0 0 0 1.5px var(--brand-soft)}
-  .btn{width:100%;padding:15px;border-radius:16px;font-family:"Baloo 2",sans-serif;
-    font-size:17px;font-weight:800;color:#fff;
-    background:linear-gradient(160deg,var(--aqua),var(--brand-strong));
-    box-shadow:0 14px 26px -12px var(--brand)}
+  .preset{padding:9px 14px;border-radius:12px;background:var(--surface-2);font-weight:800;font-size:14px;color:var(--ink-2)}
+  .preset.on{background:var(--surface-3);color:var(--brand-strong);box-shadow:inset 0 0 0 1.5px var(--brand-soft)}
+  .btn{width:100%;padding:15px;border-radius:16px;font-family:"Baloo 2",sans-serif;font-size:17px;font-weight:800;color:#fff;background:linear-gradient(160deg,var(--aqua),var(--brand-strong));box-shadow:0 14px 26px -12px var(--brand)}
   .btn:disabled{opacity:.6}
   .btn.ghost{background:var(--surface-2);color:var(--ink-2);box-shadow:none;margin-top:8px}
 
-  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(100px + env(safe-area-inset-bottom,0px));
-    background:var(--ink);color:var(--surface);font-weight:800;font-size:14px;padding:12px 18px;
-    border-radius:14px;box-shadow:var(--shadow);z-index:60;display:flex;align-items:center;gap:10px;
-    animation:toastIn .3s cubic-bezier(.22,1,.36,1)}
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(100px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--surface);font-weight:800;font-size:14px;padding:12px 18px;border-radius:14px;box-shadow:var(--shadow);z-index:60;display:flex;align-items:center;gap:10px;animation:toastIn .3s cubic-bezier(.22,1,.36,1)}
   @keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
   .toast button{color:var(--brand-soft);font-weight:800}
 
-  /* ---------- Auth ---------- */
-  .auth{min-height:100%;display:flex;align-items:center;justify-content:center;
-    padding:24px 18px calc(24px + env(safe-area-inset-bottom,0px));}
-  .auth-card{width:100%;max-width:380px;background:var(--surface);border-radius:26px;
-    box-shadow:var(--shadow);padding:28px 22px 20px;text-align:center;
-    animation:sheet .4s cubic-bezier(.22,1,.36,1)}
-  .auth-logo{width:60px;height:60px;border-radius:20px;margin:0 auto 14px;display:grid;
-    place-items:center;background:linear-gradient(160deg,var(--aqua),var(--brand-strong));
-    box-shadow:0 12px 24px -10px var(--brand)}
+  .auth{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px 18px calc(24px + env(safe-area-inset-bottom,0px));}
+  .auth-card{width:100%;max-width:380px;background:var(--surface);border-radius:26px;box-shadow:var(--shadow);padding:28px 22px 20px;text-align:center;animation:sheet .4s cubic-bezier(.22,1,.36,1)}
+  .auth-logo{width:60px;height:60px;border-radius:20px;margin:0 auto 14px;display:grid;place-items:center;background:linear-gradient(160deg,var(--aqua),var(--brand-strong));box-shadow:0 12px 24px -10px var(--brand)}
   .auth-card h1{font-size:24px;font-weight:800}
   .auth-sub{color:var(--ink-3);font-weight:700;font-size:13px;margin:4px 0 20px}
-  .auth-tabs{display:flex;gap:6px;background:var(--surface-2);padding:5px;border-radius:15px;
-    margin-bottom:18px}
-  .auth-tabs button{flex:1;padding:11px 0;border-radius:11px;font-weight:800;font-size:14.5px;
-    color:var(--ink-2);transition:.18s}
+  .auth-tabs{display:flex;gap:6px;background:var(--surface-2);padding:5px;border-radius:15px;margin-bottom:18px}
+  .auth-tabs button{flex:1;padding:11px 0;border-radius:11px;font-weight:800;font-size:14.5px;color:var(--ink-2);transition:.18s}
   .auth-tabs button.on{background:var(--surface);color:var(--brand-strong);box-shadow:var(--shadow-sm)}
   .fld{display:block;text-align:left;margin-bottom:12px}
   .fld span{display:block;font-size:12px;font-weight:800;color:var(--ink-3);margin:0 0 6px 4px}
-  .fld input{width:100%;border:1.5px solid var(--line);background:var(--surface-2);border-radius:14px;
-    padding:14px 16px;font-family:inherit;font-size:16px;font-weight:700;color:var(--ink);outline:none;
-    transition:.16s}
-  .fld input:focus{border-color:var(--brand-soft);background:var(--surface);
-    box-shadow:0 0 0 3px color-mix(in srgb,var(--brand-soft) 40%,transparent)}
+  .fld input{width:100%;border:1.5px solid var(--line);background:var(--surface-2);border-radius:14px;padding:14px 16px;font-family:inherit;font-size:16px;font-weight:700;color:var(--ink);outline:none;transition:.16s}
+  .fld input:focus{border-color:var(--brand-soft);background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand-soft) 40%,transparent)}
   .auth-err{color:#ef4444;font-weight:800;font-size:13px;min-height:18px;margin:2px 4px 10px;text-align:left}
   .auth-note{color:var(--ink-3);font-weight:700;font-size:11.5px;margin:16px 6px 4px}
-  #syncDot{position:absolute;right:-2px;top:-2px;width:12px;height:12px;border-radius:50%;
-    background:var(--good);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--good)}
+  #syncDot{position:absolute;right:-2px;top:-2px;width:12px;height:12px;border-radius:50%;background:var(--good);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--good)}
 
-  /* ---------- Friends ---------- */
+  /* Friends */
   .fadd{display:flex;gap:8px;align-items:stretch}
-  .fadd input{flex:1;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;
-    padding:14px 16px;font-family:inherit;font-size:16px;font-weight:700;color:var(--ink);outline:none;
-    transition:.16s;min-width:0}
-  .fadd input:focus{border-color:var(--brand-soft);
-    box-shadow:0 0 0 3px color-mix(in srgb,var(--brand-soft) 40%,transparent)}
+  .fadd input{flex:1;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:14px 16px;font-family:inherit;font-size:16px;font-weight:700;color:var(--ink);outline:none;transition:.16s;min-width:0}
+  .fadd input:focus{border-color:var(--brand-soft);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand-soft) 40%,transparent)}
   .fr-hint{font-size:12px;font-weight:700;color:var(--ink-3);margin:8px 4px 0;line-height:1.4}
   .fr-hint.err{color:#ef4444}
   .fr-hint.ok{color:var(--good)}
   .friends{display:flex;flex-direction:column;gap:10px}
-  .frow{display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:var(--r-md);
-    padding:13px 14px;box-shadow:var(--shadow-sm)}
-  .frow .fav{width:44px;height:44px;border-radius:14px;flex:none;display:grid;place-items:center;
-    font-family:"Baloo 2",sans-serif;font-weight:800;font-size:18px;color:#fff;
-    background:linear-gradient(160deg,var(--aqua),var(--brand-strong))}
+  .frow{display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:var(--r-md);padding:13px 14px;box-shadow:var(--shadow-sm)}
+  .frow .fav{width:44px;height:44px;border-radius:14px;flex:none;display:grid;place-items:center;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:18px;color:#fff;background:linear-gradient(160deg,var(--aqua),var(--brand-strong))}
   .frow .fmid{flex:1;min-width:0}
   .frow .fname{font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .frow .fbar{height:8px;border-radius:6px;background:var(--surface-3);margin-top:7px;overflow:hidden}
-  .frow .fbar i{display:block;height:100%;border-radius:6px;
-    background:linear-gradient(90deg,var(--aqua),var(--brand-strong));
-    transition:width .8s cubic-bezier(.22,1,.36,1)}
-  .frow .fsub{font-size:12px;font-weight:700;color:var(--ink-3);margin-top:5px;
-    font-variant-numeric:tabular-nums}
-  .frow .fpct{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:17px;flex:none;
-    min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
-  .frow .fpct.done{color:var(--good)}
-  .frow .fdel{width:30px;height:30px;border-radius:9px;color:var(--ink-3);display:grid;
-    place-items:center;flex:none}
+  .frow .fsub{font-size:12.5px;font-weight:700;color:var(--ink-3);margin-top:4px;font-variant-numeric:tabular-nums}
+  .fring{position:relative;width:50px;height:50px;flex:none}
+  .fring svg{width:100%;height:100%;transform:rotate(-90deg);display:block}
+  .frtrack{fill:none;stroke:var(--surface-3);stroke-width:4.5}
+  .frfg{fill:none;stroke:var(--brand-strong);stroke-width:4.5;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.22,1,.36,1)}
+  .frfg.done{stroke:var(--good)}
+  .frnum{position:absolute;inset:0;display:grid;place-items:center;line-height:1;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .frnum small{font-size:8px;color:var(--ink-3);font-weight:800}
+  .frnum.done{color:var(--good);font-size:19px}
+  .frow .fdel{width:30px;height:30px;border-radius:9px;color:var(--ink-3);display:grid;place-items:center;flex:none}
   .frow .fdel:hover{color:#ef4444;background:var(--surface-2)}
 
-  .splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-    flex-direction:column;gap:14px;z-index:5}
-  .splash .drop2{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;
-    background:linear-gradient(160deg,var(--aqua),var(--brand-strong));
-    box-shadow:0 12px 24px -10px var(--brand);animation:bob 1.4s ease-in-out infinite}
+  .splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:5}
+  .splash .drop2{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(160deg,var(--aqua),var(--brand-strong));box-shadow:0 12px 24px -10px var(--brand);animation:bob 1.4s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
   .splash span{color:var(--ink-3);font-weight:800;font-size:13px}
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:.001s!important;transition-duration:.001s!important}
-  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>
 
-<!-- ===== SPLASH ===== -->
 <div id="splash" class="splash">
   <div class="drop2" aria-hidden="true">
     <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3.2c3.6 4 6.3 6.9 6.3 10.3A6.3 6.3 0 1 1 5.7 13.5C5.7 10.1 8.4 7.2 12 3.2Z" fill="#fff"/></svg>
@@ -370,7 +219,6 @@
   <span>Завантаження…</span>
 </div>
 
-<!-- ===== AUTH SCREEN ===== -->
 <div id="authScreen" class="auth" hidden>
   <div class="auth-card">
     <div class="auth-logo" aria-hidden="true">
@@ -445,16 +293,13 @@
               <path d="M47,30 L113,30 L104,178 Q103,182 99,182 L61,182 Q57,182 56,178 Z"/>
             </clipPath>
           </defs>
-          <path d="M44,26 L116,26 L106,180 Q105,186 99,186 L61,186 Q55,186 54,180 Z"
-                fill="var(--surface-2)" stroke="var(--brand-soft)" stroke-width="3"/>
+          <path d="M44,26 L116,26 L106,180 Q105,186 99,186 L61,186 Q55,186 54,180 Z" fill="var(--surface-2)" stroke="var(--brand-soft)" stroke-width="3"/>
           <g clip-path="url(#glassClip)">
             <rect id="water" class="water" x="18" width="124" y="178" height="0" fill="url(#wg)"/>
             <ellipse id="waterTop" cx="80" rx="42" ry="4" cy="178" fill="#a3e4fb" opacity="0"/>
           </g>
-          <path d="M44,26 L116,26 L106,180 Q105,186 99,186 L61,186 Q55,186 54,180 Z"
-                fill="none" stroke="var(--brand-soft)" stroke-width="3"/>
-          <path d="M53,40 C50,90 51,130 57,158" stroke="#fff" stroke-width="4"
-                stroke-linecap="round" fill="none" opacity=".35"/>
+          <path d="M44,26 L116,26 L106,180 Q105,186 99,186 L61,186 Q55,186 54,180 Z" fill="none" stroke="var(--brand-soft)" stroke-width="3"/>
+          <path d="M53,40 C50,90 51,130 57,158" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".35"/>
         </svg>
         <div class="pour" id="pour">+250 мл</div>
         <div class="mascot" id="mascot">🌱</div>
@@ -488,8 +333,7 @@
             </linearGradient>
           </defs>
           <circle class="ring-bg" cx="110" cy="110" r="95"/>
-          <circle class="ring-fg" id="ring" cx="110" cy="110" r="95"
-            stroke-dasharray="597" stroke-dashoffset="597"/>
+          <circle class="ring-fg" id="ring" cx="110" cy="110" r="95" stroke-dasharray="597" stroke-dashoffset="597"/>
         </svg>
         <div class="ring-center">
           <div class="r-mascot" id="ringMascot">🌱</div>
@@ -559,8 +403,7 @@
 </nav>
 
 <script>
-/* ================= App state ================= */
-let currentUser = null;         // display name
+let currentUser = null;
 let state = {goal:2300, days:{}};
 let sel = "water";
 let lastAppliedAt = 0;
@@ -574,21 +417,11 @@ const DRINKS = {
 };
 
 function todayKey(d=new Date()){return d.toISOString().slice(0,10);}
-function today(){
-  const k=todayKey();
-  if(!state.days[k]) state.days[k]={entries:[]};
-  return state.days[k];
-}
+function today(){ const k=todayKey(); if(!state.days[k]) state.days[k]={entries:[]}; return state.days[k]; }
 function dayTotal(day){ return (day.entries||[]).reduce((a,e)=>a+e.effective,0); }
 
-/* save = push to cloud */
-function save(){
-  state.updatedAt = Date.now();
-  lastAppliedAt = state.updatedAt;
-  if(window.FB) window.FB.saveState(state);
-}
+function save(){ state.updatedAt = Date.now(); lastAppliedAt = state.updatedAt; if(window.FB) window.FB.saveState(state); }
 
-/* ================= Actions ================= */
 function addDrink(ml){
   const d = DRINKS[sel];
   const eff = Math.round(ml * d.factor);
@@ -603,8 +436,7 @@ function removeEntry(i){
   const e = today().entries.splice(i,1)[0];
   lastRemoved = e;
   save(); render();
-  toast("Видалено", false, ()=>{ today().entries.push(lastRemoved);
-    today().entries.sort((a,b)=>a.t-b.t); save(); render(); });
+  toast("Видалено", false, ()=>{ today().entries.push(lastRemoved); today().entries.sort((a,b)=>a.t-b.t); save(); render(); });
 }
 function setGoal(g){ state.goal = g; save(); render(); }
 
@@ -613,19 +445,15 @@ function computeStreak(){
   for(let i=0;i<400;i++){
     const k=todayKey(d); const day=state.days[k];
     const tot = day?dayTotal(day):0;
-    if(tot>=state.goal){ n++; }
-    else if(i===0){ }
-    else break;
+    if(tot>=state.goal){ n++; } else if(i===0){ } else break;
     d.setDate(d.getDate()-1);
   }
   return n;
 }
 
-/* ================= Render ================= */
 function render(){
   const day=today(), goal=state.goal, tot=dayTotal(day);
   const pct = goal? Math.min(tot/goal,1) : 0;
-
   const iTop=30, iBot=178, iH=iBot-iTop;
   const h=pct*iH, y=iBot-h;
   const water=document.getElementById("water");
@@ -638,36 +466,22 @@ function render(){
   document.getElementById("goal").textContent = goal;
   document.getElementById("pct").textContent = Math.round(pct*100)+"%";
   document.getElementById("mascot").textContent = mascotFor(pct);
-
   document.getElementById("ring").style.strokeDashoffset = 597*(1-pct);
   document.getElementById("ringCur").textContent = tot;
   document.getElementById("ringGoal").textContent = goal;
   document.getElementById("ringPct").textContent = Math.round(pct*100)+"% норми";
   document.getElementById("ringMascot").textContent = mascotFor(pct);
-
   let w=0,dr=0,ot=0;
-  day.entries.forEach(e=>{ const c=DRINKS[e.type].cat;
-    if(c==="water")w+=e.effective; else if(c==="drink")dr+=e.effective; else ot+=e.effective; });
+  day.entries.forEach(e=>{ const c=DRINKS[e.type].cat; if(c==="water")w+=e.effective; else if(c==="drink")dr+=e.effective; else ot+=e.effective; });
   document.getElementById("bWater").textContent=w;
   document.getElementById("bDrink").textContent=dr;
   document.getElementById("bOther").textContent=ot;
-
   document.getElementById("streak").textContent = computeStreak();
-  document.getElementById("dateLabel").textContent =
-    new Date().toLocaleDateString("uk-UA",{weekday:"long",day:"numeric",month:"long"});
-
-  renderHistory(day);
-  renderChart();
+  document.getElementById("dateLabel").textContent = new Date().toLocaleDateString("uk-UA",{weekday:"long",day:"numeric",month:"long"});
+  renderHistory(day); renderChart();
 }
 
-function mascotFor(p){
-  if(p>=1) return "🥳";
-  if(p>=.75) return "😄";
-  if(p>=.5) return "🙂";
-  if(p>=.25) return "🌊";
-  if(p>0) return "💧";
-  return "🌱";
-}
+function mascotFor(p){ if(p>=1) return "🥳"; if(p>=.75) return "😄"; if(p>=.5) return "🙂"; if(p>=.25) return "🌊"; if(p>0) return "💧"; return "🌱"; }
 
 function renderTypes(){
   const el=document.getElementById("types"); el.innerHTML="";
@@ -686,24 +500,14 @@ function updateGlassColor(){
   document.getElementById("waterTop").setAttribute("fill",c1);
 }
 
-/* ================= Amount picker + swipe ================= */
 let pick = 250;
 const STEP = 50, PMIN = 50, PMAX = 1000;
-function updatePicker(){
-  document.getElementById("pickN").textContent = pick;
-  document.getElementById("pour").textContent = "+"+pick+" мл";
-}
-function changePick(delta){
-  const p = Math.max(PMIN, Math.min(PMAX, pick+delta));
-  if(p!==pick){ pick=p; updatePicker(); haptic(); }
-}
+function updatePicker(){ document.getElementById("pickN").textContent = pick; document.getElementById("pour").textContent = "+"+pick+" мл"; }
+function changePick(delta){ const p = Math.max(PMIN, Math.min(PMAX, pick+delta)); if(p!==pick){ pick=p; updatePicker(); haptic(); } }
 function pourAnim(){
   const wrap=document.querySelector(".glass-wrap");
-  const d=document.createElement("div");
-  d.textContent="💧";
-  d.style.cssText="position:absolute;left:50%;top:-8px;transform:translateX(-50%);"+
-    "font-size:24px;pointer-events:none;z-index:4;"+
-    "transition:top .5s cubic-bezier(.55,0,.9,.55),opacity .5s ease";
+  const d=document.createElement("div"); d.textContent="💧";
+  d.style.cssText="position:absolute;left:50%;top:-8px;transform:translateX(-50%);font-size:24px;pointer-events:none;z-index:4;transition:top .5s cubic-bezier(.55,0,.9,.55),opacity .5s ease";
   wrap.appendChild(d);
   requestAnimationFrame(()=>{ d.style.top="120px"; d.style.opacity="0.15"; });
   setTimeout(()=>d.remove(),520);
@@ -714,24 +518,14 @@ function initGlass(){
   const glass=document.getElementById("glassZone");
   let lastX=0, acc=0, moved=0, dragging=false;
   const PX_PER_STEP=11;
-  glass.addEventListener("pointerdown",e=>{
-    dragging=true; lastX=e.clientX; acc=0; moved=0;
-    try{ glass.setPointerCapture(e.pointerId); }catch(_){}
-    glass.classList.add("press");
-  });
+  glass.addEventListener("pointerdown",e=>{ dragging=true; lastX=e.clientX; acc=0; moved=0; try{ glass.setPointerCapture(e.pointerId); }catch(_){} glass.classList.add("press"); });
   glass.addEventListener("pointermove",e=>{
     if(!dragging) return;
     const dx=e.clientX-lastX; lastX=e.clientX; acc+=dx; moved+=Math.abs(dx);
-    while(Math.abs(acc)>=PX_PER_STEP){
-      if(acc>0){ changePick(STEP); acc-=PX_PER_STEP; }
-      else{ changePick(-STEP); acc+=PX_PER_STEP; }
-    }
+    while(Math.abs(acc)>=PX_PER_STEP){ if(acc>0){ changePick(STEP); acc-=PX_PER_STEP; } else{ changePick(-STEP); acc+=PX_PER_STEP; } }
     if(moved>6) glass.classList.remove("press");
   });
-  const end=()=>{
-    if(!dragging) return; dragging=false; glass.classList.remove("press");
-    if(moved<8) addDrink(pick);
-  };
+  const end=()=>{ if(!dragging) return; dragging=false; glass.classList.remove("press"); if(moved<8) addDrink(pick); };
   glass.addEventListener("pointerup",end);
   glass.addEventListener("pointercancel",()=>{ dragging=false; glass.classList.remove("press"); });
   glass.addEventListener("keydown",e=>{
@@ -746,24 +540,17 @@ function initGlass(){
 function renderHistory(day){
   const el=document.getElementById("hist"); el.innerHTML="";
   const entries=[...day.entries].reverse();
-  if(!entries.length){
-    el.innerHTML=`<div class="empty"><span class="em">🫧</span>Ще нічого не випито сьогодні.<br>Додай першу склянку 💧</div>`;
-    return;
-  }
+  if(!entries.length){ el.innerHTML=`<div class="empty"><span class="em">🫧</span>Ще нічого не випито сьогодні.<br>Додай першу склянку 💧</div>`; return; }
   entries.forEach((e)=>{
     const realIdx = day.entries.indexOf(e);
     const d=DRINKS[e.type];
     const time=new Date(e.t).toLocaleTimeString("uk-UA",{hour:"2-digit",minute:"2-digit"});
     const row=document.createElement("div"); row.className="hrow";
     row.innerHTML=`
-      <div class="hi" style="background:color-mix(in srgb, ${d.color} 20%, transparent)">
-        <span style="font-size:18px">${d.icon}</span>
-      </div>
+      <div class="hi" style="background:color-mix(in srgb, ${d.color} 20%, transparent)"><span style="font-size:18px">${d.icon}</span></div>
       <div class="ht">${d.name}<small>${time}${e.effective!==e.ml?` · зараховано ${e.effective} мл`:""}</small></div>
       <div class="hv">${e.ml} мл</div>
-      <button class="del" aria-label="Видалити">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>`;
+      <button class="del" aria-label="Видалити"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`;
     row.querySelector(".del").onclick=()=>removeEntry(realIdx);
     el.appendChild(row);
   });
@@ -778,10 +565,8 @@ function renderChart(){
   const max=Math.max(goal, ...totals, 1);
   let hit=0, best=0, sum=0;
   totals.forEach(t=>{ if(t>=goal)hit++; if(t>best)best=t; sum+=t; });
-
   days.forEach((dd,i)=>{
-    const t=totals[i]; const h=Math.max((t/max)*100,3); const isToday=i===6;
-    const under=t<goal;
+    const t=totals[i]; const h=Math.max((t/max)*100,3); const isToday=i===6; const under=t<goal;
     const col=document.createElement("div"); col.className="bar-col";
     const goalPct=(goal/max)*100;
     col.innerHTML=`
@@ -798,8 +583,7 @@ function renderChart(){
   document.getElementById("bestDay").innerHTML=best+'<span style="font-size:15px;color:var(--ink-3)"> мл</span>';
 }
 
-function popMascot(){ const m=document.getElementById("mascot");
-  m.classList.add("pop"); setTimeout(()=>m.classList.remove("pop"),400); }
+function popMascot(){ const m=document.getElementById("mascot"); m.classList.add("pop"); setTimeout(()=>m.classList.remove("pop"),400); }
 
 let toastTimer;
 function toast(msg, ok, undo){
@@ -807,33 +591,22 @@ function toast(msg, ok, undo){
   document.querySelectorAll(".toast").forEach(t=>t.remove());
   const t=document.createElement("div"); t.className="toast";
   t.innerHTML = `<span>${ok?"✓ ":""}${msg}</span>`;
-  if(undo){ const b=document.createElement("button"); b.textContent="Скасувати";
-    b.onclick=()=>{ undo(); t.remove(); }; t.appendChild(b); }
+  if(undo){ const b=document.createElement("button"); b.textContent="Скасувати"; b.onclick=()=>{ undo(); t.remove(); }; t.appendChild(b); }
   document.body.appendChild(t);
   toastTimer=setTimeout(()=>t.remove(), undo?4000:1600);
 }
-function celebrate(){
-  toast("🎉 Норму досягнуто! Молодець!", false);
-  const m=document.getElementById("mascot");
-  m.textContent="🥳"; m.classList.add("pop");
-  burst();
-}
+function celebrate(){ toast("🎉 Норму досягнуто! Молодець!", false); const m=document.getElementById("mascot"); m.textContent="🥳"; m.classList.add("pop"); burst(); }
 function burst(){
   const wrap=document.querySelector(".ring-wrap");
   for(let i=0;i<18;i++){
-    const s=document.createElement("div");
-    const emo=["💧","✨","💙","🫧"][i%4];
-    s.textContent=emo; s.style.cssText=`position:absolute;left:50%;top:45%;font-size:${12+Math.random()*12}px;
-      pointer-events:none;z-index:5;transition:all .9s ease-out;`;
+    const s=document.createElement("div"); const emo=["💧","✨","💙","🫧"][i%4];
+    s.textContent=emo; s.style.cssText=`position:absolute;left:50%;top:45%;font-size:${12+Math.random()*12}px;pointer-events:none;z-index:5;transition:all .9s ease-out;`;
     wrap.appendChild(s);
-    requestAnimationFrame(()=>{ const a=Math.random()*6.28,r=70+Math.random()*70;
-      s.style.transform=`translate(${Math.cos(a)*r}px,${Math.sin(a)*r}px)`;
-      s.style.opacity="0"; });
+    requestAnimationFrame(()=>{ const a=Math.random()*6.28,r=70+Math.random()*70; s.style.transform=`translate(${Math.cos(a)*r}px,${Math.sin(a)*r}px)`; s.style.opacity="0"; });
     setTimeout(()=>s.remove(),950);
   }
 }
 
-/* ================= Modals ================= */
 function openGoal(){
   const opts=[1500,2000,2300,2500,3000];
   const bg=makeModal(`
@@ -845,12 +618,9 @@ function openGoal(){
     <button class="btn ghost" id="gCalc">Розрахувати за вагою</button>
   `);
   const inp=bg.querySelector("#gInp"), pre=bg.querySelector("#gPre");
-  opts.forEach(v=>{ const b=document.createElement("button");
-    b.className="preset"+(v===state.goal?" on":""); b.textContent=v;
-    b.onclick=()=>{ inp.value=v; pre.querySelectorAll(".preset").forEach(x=>x.classList.remove("on"));
-      b.classList.add("on"); }; pre.appendChild(b); });
-  bg.querySelector("#gOk").onclick=()=>{ const v=Math.max(500,Math.min(6000,parseInt(inp.value)||state.goal));
-    setGoal(v); closeModal(bg); toast("Норму оновлено",true); };
+  opts.forEach(v=>{ const b=document.createElement("button"); b.className="preset"+(v===state.goal?" on":""); b.textContent=v;
+    b.onclick=()=>{ inp.value=v; pre.querySelectorAll(".preset").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }; pre.appendChild(b); });
+  bg.querySelector("#gOk").onclick=()=>{ const v=Math.max(500,Math.min(6000,parseInt(inp.value)||state.goal)); setGoal(v); closeModal(bg); toast("Норму оновлено",true); };
   bg.querySelector("#gCalc").onclick=()=>{ closeModal(bg); openCalc(); };
 }
 function openCalc(){
@@ -862,8 +632,7 @@ function openCalc(){
     <button class="btn" id="wOk">Встановити</button>
   `);
   const inp=bg.querySelector("#wInp"), res=bg.querySelector("#wRes");
-  const calc=()=>{ const kg=parseInt(inp.value)||0; const ml=Math.round(kg*30/50)*50;
-    res.textContent=ml+" мл"; return ml; };
+  const calc=()=>{ const kg=parseInt(inp.value)||0; const ml=Math.round(kg*30/50)*50; res.textContent=ml+" мл"; return ml; };
   inp.oninput=calc; calc();
   bg.querySelector("#wOk").onclick=()=>{ setGoal(calc()); closeModal(bg); toast("Норму оновлено",true); };
 }
@@ -872,12 +641,9 @@ function openAccount(){
   const bg = makeModal(`
     <h3>Акаунт</h3>
     <p>Ви увійшли як <b style="color:var(--brand-strong)">${esc(currentUser||"друг")}</b>${email?`<br><span style="color:var(--ink-3)">${esc(email)}</span>`:""}</p>
-    <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);
-         border-radius:14px;padding:12px 14px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border-radius:14px;padding:12px 14px;margin-bottom:16px">
       <span style="font-size:22px">☁️</span>
-      <div style="font-size:13px;font-weight:700;line-height:1.35;color:var(--ink-2)">
-        Синхронізація ввімкнена. Дані доступні на всіх пристроях — просто увійди тим самим email.
-      </div>
+      <div style="font-size:13px;font-weight:700;line-height:1.35;color:var(--ink-2)">Синхронізація ввімкнена. Дані доступні на всіх пристроях — просто увійди тим самим email.</div>
     </div>
     <button class="btn" id="acGoal">🎯 Змінити денну норму</button>
     <button class="btn ghost" id="acLogout">Вийти з акаунта</button>
@@ -885,28 +651,17 @@ function openAccount(){
   bg.querySelector("#acGoal").onclick=()=>{ closeModal(bg); openGoal(); };
   bg.querySelector("#acLogout").onclick=()=>{ closeModal(bg); if(window.FB) window.FB.logout(); };
 }
-function makeModal(html){
-  const bg=document.createElement("div"); bg.className="modal-bg";
-  bg.innerHTML=`<div class="modal">${html}</div>`;
-  bg.onclick=(e)=>{ if(e.target===bg) closeModal(bg); };
-  document.body.appendChild(bg); return bg;
-}
+function makeModal(html){ const bg=document.createElement("div"); bg.className="modal-bg"; bg.innerHTML=`<div class="modal">${html}</div>`; bg.onclick=(e)=>{ if(e.target===bg) closeModal(bg); }; document.body.appendChild(bg); return bg; }
 function closeModal(bg){ bg.style.animation="fade .2s reverse"; setTimeout(()=>bg.remove(),180); }
 
-/* ================= Nav ================= */
 function switchView(v){
   if(v==="_goal"){ openGoal(); return; }
-  ["Home","Friends","Stats","Hist"].forEach(x=>{
-    document.getElementById("view"+x).hidden = (x!==v);
-  });
-  document.querySelectorAll(".nav-btn").forEach(b=>
-    b.classList.toggle("on", b.dataset.view===v));
+  ["Home","Friends","Stats","Hist"].forEach(x=>{ document.getElementById("view"+x).hidden = (x!==v); });
+  document.querySelectorAll(".nav-btn").forEach(b=> b.classList.toggle("on", b.dataset.view===v));
   if(v==="Friends") renderFriends();
 }
-document.querySelectorAll(".nav-btn").forEach(b=>
-  b.onclick=()=>switchView(b.dataset.view));
+document.querySelectorAll(".nav-btn").forEach(b=> b.onclick=()=>switchView(b.dataset.view));
 
-/* ================= Theme ================= */
 document.getElementById("themeBtn").onclick=()=>{
   const cur=document.documentElement.getAttribute("data-theme");
   const isDark = cur==="dark" || (!cur && matchMedia("(prefers-color-scheme:dark)").matches);
@@ -915,7 +670,6 @@ document.getElementById("themeBtn").onclick=()=>{
 };
 try{ const t=localStorage.getItem("aqua.theme"); if(t) document.documentElement.setAttribute("data-theme",t); }catch(e){}
 
-/* ================= Auth UI ================= */
 let authMode = "login";
 function setAuthMode(m){
   authMode = m;
@@ -943,18 +697,14 @@ async function submitAuth(){
   const name=document.getElementById("auName").value.trim();
   const email=document.getElementById("auEmail").value.trim();
   const pass=document.getElementById("auPass").value;
-  const err=document.getElementById("authErr");
-  err.textContent="";
+  const err=document.getElementById("authErr"); err.textContent="";
   if(!window.FB){ err.textContent="Сервіс ще завантажується, зачекай секунду…"; return; }
   if(!/.+@.+\..+/.test(email)){ err.textContent="Введи коректний email"; return; }
   if(pass.length<6){ err.textContent="Пароль мінімум 6 символів"; return; }
   if(authMode==="register" && name.length<2){ err.textContent="Введи ім'я"; return; }
-  const btn=document.getElementById("auSubmit"); const old=btn.textContent;
-  btn.disabled=true; btn.textContent="Хвилинку…";
-  try{
-    if(authMode==="register") await window.FB.register(email,pass,name);
-    else await window.FB.login(email,pass);
-  }catch(e){ err.textContent=authErrText(e && e.code); }
+  const btn=document.getElementById("auSubmit"); const old=btn.textContent; btn.disabled=true; btn.textContent="Хвилинку…";
+  try{ if(authMode==="register") await window.FB.register(email,pass,name); else await window.FB.login(email,pass); }
+  catch(e){ err.textContent=authErrText(e && e.code); }
   btn.disabled=false; btn.textContent=old;
 }
 document.getElementById("tabLogin").onclick = ()=>setAuthMode("login");
@@ -962,7 +712,6 @@ document.getElementById("tabReg").onclick   = ()=>setAuthMode("register");
 document.getElementById("acctBtn").onclick  = openAccount;
 document.getElementById("authForm").addEventListener("submit", e=>{ e.preventDefault(); submitAuth(); });
 
-/* ================= Screen control (called by Firebase glue) ================= */
 function showApp(name){
   currentUser = name || "друг";
   document.getElementById("acctName").textContent = currentUser;
@@ -971,8 +720,7 @@ function showApp(name){
   document.getElementById("appRoot").hidden = false;
   document.getElementById("mainNav").hidden = false;
   document.getElementById("syncDot").hidden = false;
-  renderTypes(); updateGlassColor(); updatePicker(); render();
-  switchView("Home");
+  renderTypes(); updateGlassColor(); updatePicker(); render(); switchView("Home");
 }
 function showAuth(){
   currentUser = null;
@@ -990,41 +738,24 @@ function applyCloudState(data){
   lastAppliedAt = data.updatedAt || lastAppliedAt;
   if(!document.getElementById("appRoot").hidden) render();
 }
-window.showApp = showApp;
-window.showAuth = showAuth;
-window.applyCloudState = applyCloudState;
+window.showApp = showApp; window.showAuth = showAuth; window.applyCloudState = applyCloudState;
 
-/* ================= Friends ================= */
 let friendUids = [];
 let friendSubs = {};
 let friendInfo = {};
-
 function applyFriends(uids){
   uids = Array.isArray(uids) ? uids.filter(Boolean) : [];
   friendUids = uids;
-  Object.keys(friendSubs).forEach(uid=>{
-    if(!uids.includes(uid)){ try{friendSubs[uid]();}catch(e){} delete friendSubs[uid]; delete friendInfo[uid]; }
-  });
-  uids.forEach(uid=>{
-    if(!friendSubs[uid] && window.FB && window.FB.watchProfile){
-      friendSubs[uid] = window.FB.watchProfile(uid, info=>{ friendInfo[uid]=info; renderFriends(); });
-    }
-  });
+  Object.keys(friendSubs).forEach(uid=>{ if(!uids.includes(uid)){ try{friendSubs[uid]();}catch(e){} delete friendSubs[uid]; delete friendInfo[uid]; } });
+  uids.forEach(uid=>{ if(!friendSubs[uid] && window.FB && window.FB.watchProfile){ friendSubs[uid] = window.FB.watchProfile(uid, info=>{ friendInfo[uid]=info; renderFriends(); }); } });
   renderFriends();
 }
 window.applyFriends = applyFriends;
-
-function friendTodayTotal(info){
-  if(!info) return 0;
-  return (info.todayKey === todayKey()) ? (info.todayTotal||0) : 0;
-}
+function friendTodayTotal(info){ if(!info) return 0; return (info.todayKey === todayKey()) ? (info.todayTotal||0) : 0; }
 function renderFriends(){
   const el=document.getElementById("friendsList"); if(!el) return;
   el.innerHTML="";
-  if(!friendUids.length){
-    el.innerHTML=`<div class="empty"><span class="em">👋</span>Поки що немає друзів.<br>Додай друга за email вище — і бачитимеш його прогрес.</div>`;
-    return;
-  }
+  if(!friendUids.length){ el.innerHTML=`<div class="empty"><span class="em">👋</span>Поки що немає друзів.<br>Додай друга за email вище — і бачитимеш його прогрес.</div>`; return; }
   friendUids.forEach(uid=>{
     const info=friendInfo[uid];
     const name=(info&&info.name)||"Друг";
@@ -1033,23 +764,26 @@ function renderFriends(){
     const pct=goal?Math.min(tot/goal,1):0;
     const done=pct>=1;
     const initial=(name.trim()[0]||"?").toUpperCase();
+    const C=113.1, off=(C*(1-pct)).toFixed(1);
     const row=document.createElement("div"); row.className="frow";
     row.innerHTML=`
       <div class="fav">${esc(initial)}</div>
       <div class="fmid">
         <div class="fname">${esc(name)}</div>
-        <div class="fbar"><i style="width:${Math.round(pct*100)}%"></i></div>
         <div class="fsub">${tot} / ${goal} мл${info?"":" · завантаження…"}</div>
       </div>
-      <div class="fpct ${done?'done':''}">${done?"✓":Math.round(pct*100)+"%"}</div>
-      <button class="fdel" aria-label="Видалити друга">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>`;
+      <div class="fring">
+        <svg viewBox="0 0 44 44">
+          <circle class="frtrack" cx="22" cy="22" r="18"/>
+          <circle class="frfg ${done?'done':''}" cx="22" cy="22" r="18" stroke-dasharray="${C}" stroke-dashoffset="${off}"/>
+        </svg>
+        <span class="frnum ${done?'done':''}">${done?"✓":Math.round(pct*100)+"<small>%</small>"}</span>
+      </div>
+      <button class="fdel" aria-label="Видалити друга"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`;
     row.querySelector(".fdel").onclick=()=>{ if(window.FB) window.FB.removeFriend(uid).catch(()=>{}); };
     el.appendChild(row);
   });
 }
-
 async function addFriend(){
   const inp=document.getElementById("frEmail");
   const msg=document.getElementById("frMsg");
@@ -1064,28 +798,20 @@ async function addFriend(){
     if(!uid){ msg.textContent="Користувача з таким email не знайдено. Можливо, він ще не зареєструвався."; msg.classList.add("err"); return; }
     if(uid===window.FB.myUid()){ msg.textContent="Це ти 🙂"; msg.classList.add("err"); return; }
     if(friendUids.includes(uid)){ msg.textContent="Цей друг уже доданий."; return; }
-    await window.FB.addFriend(uid);
-    inp.value="";
-    msg.textContent="Друга додано! ✓"; msg.classList.add("ok");
+    await window.FB.addFriend(uid); inp.value=""; msg.textContent="Друга додано! ✓"; msg.classList.add("ok");
   }catch(e){ msg.textContent="Не вдалося додати. Спробуй ще раз."; msg.classList.add("err"); }
 }
 document.getElementById("frAdd").onclick=addFriend;
 document.getElementById("frEmail").addEventListener("keydown",e=>{ if(e.key==="Enter") addFriend(); });
 
-/* ================= Boot ================= */
 initGlass();
 setTimeout(()=>{ if(!window.__authResolved) showAuth(); }, 3500);
 </script>
 
-<!-- ================= Firebase (cloud auth + sync) ================= -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getAuth, setPersistence, browserLocalPersistence,
-         createUserWithEmailAndPassword, signInWithEmailAndPassword,
-         onAuthStateChanged, signOut, updateProfile }
-  from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, arrayUnion, arrayRemove }
-  from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { getAuth, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCEUT-CkeyCkFehaHsFyAo0kBA00zJrHj0",
@@ -1097,76 +823,39 @@ const firebaseConfig = {
 };
 
 let auth=null, db=null, unsub=null, saveTimer=null;
-try{
-  const app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  db   = getFirestore(app);
-  await setPersistence(auth, browserLocalPersistence);
-}catch(e){ console.error("Firebase init failed:", e); }
+try{ const app = initializeApp(firebaseConfig); auth = getAuth(app); db = getFirestore(app); await setPersistence(auth, browserLocalPersistence); }catch(e){ console.error("Firebase init failed:", e); }
 
 function emailKey(e){ return String(e||"").trim().toLowerCase(); }
 function todayKeyStr(){ return new Date().toISOString().slice(0,10); }
-function computeTodayTotal(st){
-  const d = st && st.days && st.days[todayKeyStr()];
-  if(!d || !d.entries) return 0;
-  return d.entries.reduce((a,e)=>a+(e.effective||0),0);
-}
+function computeTodayTotal(st){ const d = st && st.days && st.days[todayKeyStr()]; if(!d || !d.entries) return 0; return d.entries.reduce((a,e)=>a+(e.effective||0),0); }
 function writeProfile(st){
   if(!auth || !auth.currentUser || !db) return Promise.resolve();
   const u=auth.currentUser;
-  return setDoc(doc(db,"profiles",u.uid), {
-    name: u.displayName || "",
-    goal: st ? (st.goal||2300) : 2300,
-    todayKey: todayKeyStr(),
-    todayTotal: st ? computeTodayTotal(st) : 0,
-    updatedAt: Date.now()
-  }, {merge:true}).catch(e=>console.error("profile write:", e));
+  return setDoc(doc(db,"profiles",u.uid), { name: u.displayName || "", goal: st ? (st.goal||2300) : 2300, todayKey: todayKeyStr(), todayTotal: st ? computeTodayTotal(st) : 0, updatedAt: Date.now() }, {merge:true}).catch(e=>console.error("profile write:", e));
 }
 
 window.FB = {
-  register(email, pass, name){
-    return createUserWithEmailAndPassword(auth, email, pass)
-      .then(cred => updateProfile(cred.user, {displayName:name}).then(()=>cred));
-  },
+  register(email, pass, name){ return createUserWithEmailAndPassword(auth, email, pass).then(cred => updateProfile(cred.user, {displayName:name}).then(()=>cred)); },
   login(email, pass){ return signInWithEmailAndPassword(auth, email, pass); },
   logout(){ return signOut(auth); },
   email(){ return auth && auth.currentUser ? auth.currentUser.email : ""; },
   myUid(){ return auth && auth.currentUser ? auth.currentUser.uid : null; },
   saveState(st){
     if(!auth || !auth.currentUser || !db) return;
-    const uid  = auth.currentUser.uid;
-    const name = auth.currentUser.displayName || "";
+    const uid  = auth.currentUser.uid; const name = auth.currentUser.displayName || "";
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(()=>{
-      setDoc(doc(db,"users",uid),
-        {goal:st.goal, days:st.days, name, updatedAt:st.updatedAt||Date.now()},
-        {merge:true}).catch(e=>console.error("save failed:", e));
-      writeProfile(st);
-    }, 700);
+    saveTimer = setTimeout(()=>{ setDoc(doc(db,"users",uid), {goal:st.goal, days:st.days, name, updatedAt:st.updatedAt||Date.now()}, {merge:true}).catch(e=>console.error("save failed:", e)); writeProfile(st); }, 700);
   },
-  async findUidByEmail(email){
-    if(!db) return null;
-    const s = await getDoc(doc(db,"emailIndex", emailKey(email)));
-    return s.exists() ? (s.data().uid || null) : null;
-  },
-  addFriend(fuid){
-    return setDoc(doc(db,"users",auth.currentUser.uid), {friends: arrayUnion(fuid)}, {merge:true});
-  },
-  removeFriend(fuid){
-    return updateDoc(doc(db,"users",auth.currentUser.uid), {friends: arrayRemove(fuid)});
-  },
-  watchProfile(uid, cb){
-    return onSnapshot(doc(db,"profiles",uid),
-      s => cb(s.exists() ? s.data() : null),
-      () => cb(null));
-  }
+  async findUidByEmail(email){ if(!db) return null; const s = await getDoc(doc(db,"emailIndex", emailKey(email))); return s.exists() ? (s.data().uid || null) : null; },
+  addFriend(fuid){ return setDoc(doc(db,"users",auth.currentUser.uid), {friends: arrayUnion(fuid)}, {merge:true}); },
+  removeFriend(fuid){ return updateDoc(doc(db,"users",auth.currentUser.uid), {friends: arrayRemove(fuid)}); },
+  watchProfile(uid, cb){ return onSnapshot(doc(db,"profiles",uid), s => cb(s.exists() ? s.data() : null), () => cb(null)); }
 };
 
 function ensureIndex(){
   if(!auth || !auth.currentUser || !db) return;
   const u=auth.currentUser;
-  setDoc(doc(db,"emailIndex", emailKey(u.email)),
-    {uid:u.uid, updatedAt:Date.now()}, {merge:true}).catch(e=>console.error("index:", e));
+  setDoc(doc(db,"emailIndex", emailKey(u.email)), {uid:u.uid, updatedAt:Date.now()}, {merge:true}).catch(e=>console.error("index:", e));
   writeProfile(null);
 }
 
@@ -1179,18 +868,10 @@ if(auth){
       ensureIndex();
       const ref = doc(db,"users",user.uid);
       unsub = onSnapshot(ref, snap=>{
-        if(snap.exists()){
-          const d=snap.data();
-          window.applyCloudState(d);
-          window.applyFriends(d.friends || []);
-        } else {
-          setDoc(ref, {goal:2300, days:{}, friends:[], name:user.displayName||"", updatedAt:Date.now()}).catch(()=>{});
-        }
+        if(snap.exists()){ const d=snap.data(); window.applyCloudState(d); window.applyFriends(d.friends || []); }
+        else { setDoc(ref, {goal:2300, days:{}, friends:[], name:user.displayName||"", updatedAt:Date.now()}).catch(()=>{}); }
       }, err=>console.error("snapshot error:", err));
-    } else {
-      window.applyFriends([]);
-      window.showAuth();
-    }
+    } else { window.applyFriends([]); window.showAuth(); }
   });
 }
 </script>
