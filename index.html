@@ -316,6 +316,37 @@
   #syncDot{position:absolute;right:-2px;top:-2px;width:12px;height:12px;border-radius:50%;
     background:var(--good);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--good)}
 
+  /* ---------- Friends ---------- */
+  .fadd{display:flex;gap:8px;align-items:stretch}
+  .fadd input{flex:1;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;
+    padding:14px 16px;font-family:inherit;font-size:16px;font-weight:700;color:var(--ink);outline:none;
+    transition:.16s;min-width:0}
+  .fadd input:focus{border-color:var(--brand-soft);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--brand-soft) 40%,transparent)}
+  .fr-hint{font-size:12px;font-weight:700;color:var(--ink-3);margin:8px 4px 0;line-height:1.4}
+  .fr-hint.err{color:#ef4444}
+  .fr-hint.ok{color:var(--good)}
+  .friends{display:flex;flex-direction:column;gap:10px}
+  .frow{display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:var(--r-md);
+    padding:13px 14px;box-shadow:var(--shadow-sm)}
+  .frow .fav{width:44px;height:44px;border-radius:14px;flex:none;display:grid;place-items:center;
+    font-family:"Baloo 2",sans-serif;font-weight:800;font-size:18px;color:#fff;
+    background:linear-gradient(160deg,var(--aqua),var(--brand-strong))}
+  .frow .fmid{flex:1;min-width:0}
+  .frow .fname{font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .frow .fbar{height:8px;border-radius:6px;background:var(--surface-3);margin-top:7px;overflow:hidden}
+  .frow .fbar i{display:block;height:100%;border-radius:6px;
+    background:linear-gradient(90deg,var(--aqua),var(--brand-strong));
+    transition:width .8s cubic-bezier(.22,1,.36,1)}
+  .frow .fsub{font-size:12px;font-weight:700;color:var(--ink-3);margin-top:5px;
+    font-variant-numeric:tabular-nums}
+  .frow .fpct{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:17px;flex:none;
+    min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+  .frow .fpct.done{color:var(--good)}
+  .frow .fdel{width:30px;height:30px;border-radius:9px;color:var(--ink-3);display:grid;
+    place-items:center;flex:none}
+  .frow .fdel:hover{color:#ef4444;background:var(--surface-2)}
+
   .splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
     flex-direction:column;gap:14px;z-index:5}
   .splash .drop2{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;
@@ -493,6 +524,17 @@
     <div class="section-t" style="margin-top:14px">Історія за сьогодні</div>
     <div class="hist" id="hist"></div>
   </section>
+
+  <section id="viewFriends" class="view" hidden>
+    <div class="section-t" style="margin-top:14px">Додати друга</div>
+    <div class="fadd">
+      <input id="frEmail" type="email" inputmode="email" autocomplete="off" placeholder="email друга">
+      <button class="btn" id="frAdd" style="width:auto;padding:14px 18px;font-size:15px">Додати</button>
+    </div>
+    <div class="fr-hint" id="frMsg">Друг має бути зареєстрований у застосунку тим самим email.</div>
+    <div class="section-t">Друзі</div>
+    <div class="friends" id="friendsList"></div>
+  </section>
 </div>
 
 <nav id="mainNav" hidden>
@@ -501,6 +543,10 @@
       <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c3.4 3.8 6 6.6 6 9.8a6 6 0 1 1-12 0c0-3.2 2.6-6 6-9.8Z"/></svg>
       Сьогодні
     </button>
+    <button class="nav-btn" data-view="Friends" role="tab">
+      <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-4.7 5.5-4.7s5.5 1.7 5.5 4.7"/><path d="M16 5.2a3 3 0 0 1 0 5.6M17.5 14.4c2.3.5 3.9 2 3.9 4.6"/></svg>
+      Друзі
+    </button>
     <button class="nav-btn" data-view="Stats" role="tab">
       <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
       Статистика
@@ -508,10 +554,6 @@
     <button class="nav-btn" data-view="Hist" role="tab">
       <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>
       Історія
-    </button>
-    <button class="nav-btn" id="goalNav" data-view="_goal" role="tab">
-      <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
-      Норма
     </button>
   </div>
 </nav>
@@ -705,7 +747,7 @@ function renderHistory(day){
   const el=document.getElementById("hist"); el.innerHTML="";
   const entries=[...day.entries].reverse();
   if(!entries.length){
-    el.innerHTML=`<div class="empty"><span class="em">🫗</span>Ще нічого не випито сьогодні.<br>Додай першу склянку 💧</div>`;
+    el.innerHTML=`<div class="empty"><span class="em">🫧</span>Ще нічого не випито сьогодні.<br>Додай першу склянку 💧</div>`;
     return;
   }
   entries.forEach((e)=>{
@@ -780,7 +822,7 @@ function burst(){
   const wrap=document.querySelector(".ring-wrap");
   for(let i=0;i<18;i++){
     const s=document.createElement("div");
-    const emo=["💧","✨","💙","🩵"][i%4];
+    const emo=["💧","✨","💙","🫧"][i%4];
     s.textContent=emo; s.style.cssText=`position:absolute;left:50%;top:45%;font-size:${12+Math.random()*12}px;
       pointer-events:none;z-index:5;transition:all .9s ease-out;`;
     wrap.appendChild(s);
@@ -837,8 +879,10 @@ function openAccount(){
         Синхронізація ввімкнена. Дані доступні на всіх пристроях — просто увійди тим самим email.
       </div>
     </div>
+    <button class="btn" id="acGoal">🎯 Змінити денну норму</button>
     <button class="btn ghost" id="acLogout">Вийти з акаунта</button>
   `);
+  bg.querySelector("#acGoal").onclick=()=>{ closeModal(bg); openGoal(); };
   bg.querySelector("#acLogout").onclick=()=>{ closeModal(bg); if(window.FB) window.FB.logout(); };
 }
 function makeModal(html){
@@ -852,11 +896,12 @@ function closeModal(bg){ bg.style.animation="fade .2s reverse"; setTimeout(()=>b
 /* ================= Nav ================= */
 function switchView(v){
   if(v==="_goal"){ openGoal(); return; }
-  ["Home","Stats","Hist"].forEach(x=>{
+  ["Home","Friends","Stats","Hist"].forEach(x=>{
     document.getElementById("view"+x).hidden = (x!==v);
   });
   document.querySelectorAll(".nav-btn").forEach(b=>
     b.classList.toggle("on", b.dataset.view===v));
+  if(v==="Friends") renderFriends();
 }
 document.querySelectorAll(".nav-btn").forEach(b=>
   b.onclick=()=>switchView(b.dataset.view));
@@ -890,7 +935,7 @@ function authErrText(code){
     "auth/wrong-password":"Невірний пароль",
     "auth/user-not-found":"Акаунт із таким email не знайдено",
     "auth/too-many-requests":"Забагато спроб. Спробуй трохи згодом",
-    "auth/network-request-failed":"Немає зʼєднання з мережею",
+    "auth/network-request-failed":"Немає зєднання з мережею",
   };
   return m[code] || "Сталася помилка. Спробуй ще раз";
 }
@@ -909,7 +954,6 @@ async function submitAuth(){
   try{
     if(authMode==="register") await window.FB.register(email,pass,name);
     else await window.FB.login(email,pass);
-    // onAuthStateChanged reveals the app
   }catch(e){ err.textContent=authErrText(e && e.code); }
   btn.disabled=false; btn.textContent=old;
 }
@@ -940,7 +984,7 @@ function showAuth(){
 }
 function applyCloudState(data){
   if(!data) return;
-  if((data.updatedAt||0) < lastAppliedAt) return;   // we already have newer local edits
+  if((data.updatedAt||0) < lastAppliedAt) return;
   state.goal = data.goal || 2300;
   state.days = data.days || {};
   lastAppliedAt = data.updatedAt || lastAppliedAt;
@@ -950,9 +994,86 @@ window.showApp = showApp;
 window.showAuth = showAuth;
 window.applyCloudState = applyCloudState;
 
+/* ================= Friends ================= */
+let friendUids = [];
+let friendSubs = {};
+let friendInfo = {};
+
+function applyFriends(uids){
+  uids = Array.isArray(uids) ? uids.filter(Boolean) : [];
+  friendUids = uids;
+  Object.keys(friendSubs).forEach(uid=>{
+    if(!uids.includes(uid)){ try{friendSubs[uid]();}catch(e){} delete friendSubs[uid]; delete friendInfo[uid]; }
+  });
+  uids.forEach(uid=>{
+    if(!friendSubs[uid] && window.FB && window.FB.watchProfile){
+      friendSubs[uid] = window.FB.watchProfile(uid, info=>{ friendInfo[uid]=info; renderFriends(); });
+    }
+  });
+  renderFriends();
+}
+window.applyFriends = applyFriends;
+
+function friendTodayTotal(info){
+  if(!info) return 0;
+  return (info.todayKey === todayKey()) ? (info.todayTotal||0) : 0;
+}
+function renderFriends(){
+  const el=document.getElementById("friendsList"); if(!el) return;
+  el.innerHTML="";
+  if(!friendUids.length){
+    el.innerHTML=`<div class="empty"><span class="em">👋</span>Поки що немає друзів.<br>Додай друга за email вище — і бачитимеш його прогрес.</div>`;
+    return;
+  }
+  friendUids.forEach(uid=>{
+    const info=friendInfo[uid];
+    const name=(info&&info.name)||"Друг";
+    const goal=(info&&info.goal)||2300;
+    const tot=friendTodayTotal(info);
+    const pct=goal?Math.min(tot/goal,1):0;
+    const done=pct>=1;
+    const initial=(name.trim()[0]||"?").toUpperCase();
+    const row=document.createElement("div"); row.className="frow";
+    row.innerHTML=`
+      <div class="fav">${esc(initial)}</div>
+      <div class="fmid">
+        <div class="fname">${esc(name)}</div>
+        <div class="fbar"><i style="width:${Math.round(pct*100)}%"></i></div>
+        <div class="fsub">${tot} / ${goal} мл${info?"":" · завантаження…"}</div>
+      </div>
+      <div class="fpct ${done?'done':''}">${done?"✓":Math.round(pct*100)+"%"}</div>
+      <button class="fdel" aria-label="Видалити друга">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>`;
+    row.querySelector(".fdel").onclick=()=>{ if(window.FB) window.FB.removeFriend(uid).catch(()=>{}); };
+    el.appendChild(row);
+  });
+}
+
+async function addFriend(){
+  const inp=document.getElementById("frEmail");
+  const msg=document.getElementById("frMsg");
+  const email=(inp.value||"").trim().toLowerCase();
+  msg.className="fr-hint";
+  if(!/.+@.+\..+/.test(email)){ msg.textContent="Введи коректний email."; msg.classList.add("err"); return; }
+  if(!window.FB){ msg.textContent="Зачекай секунду, сервіс завантажується…"; return; }
+  if(email===(window.FB.email()||"").toLowerCase()){ msg.textContent="Це твій власний email 🙂"; msg.classList.add("err"); return; }
+  msg.textContent="Шукаю…";
+  try{
+    const uid=await window.FB.findUidByEmail(email);
+    if(!uid){ msg.textContent="Користувача з таким email не знайдено. Можливо, він ще не зареєструвався."; msg.classList.add("err"); return; }
+    if(uid===window.FB.myUid()){ msg.textContent="Це ти 🙂"; msg.classList.add("err"); return; }
+    if(friendUids.includes(uid)){ msg.textContent="Цей друг уже доданий."; return; }
+    await window.FB.addFriend(uid);
+    inp.value="";
+    msg.textContent="Друга додано! ✓"; msg.classList.add("ok");
+  }catch(e){ msg.textContent="Не вдалося додати. Спробуй ще раз."; msg.classList.add("err"); }
+}
+document.getElementById("frAdd").onclick=addFriend;
+document.getElementById("frEmail").addEventListener("keydown",e=>{ if(e.key==="Enter") addFriend(); });
+
 /* ================= Boot ================= */
 initGlass();
-// Fallback: if Firebase never answers, show login after a moment
 setTimeout(()=>{ if(!window.__authResolved) showAuth(); }, 3500);
 </script>
 
@@ -963,7 +1084,7 @@ import { getAuth, setPersistence, browserLocalPersistence,
          createUserWithEmailAndPassword, signInWithEmailAndPassword,
          onAuthStateChanged, signOut, updateProfile }
   from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import { getFirestore, doc, setDoc, onSnapshot }
+import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, arrayUnion, arrayRemove }
   from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -983,6 +1104,25 @@ try{
   await setPersistence(auth, browserLocalPersistence);
 }catch(e){ console.error("Firebase init failed:", e); }
 
+function emailKey(e){ return String(e||"").trim().toLowerCase(); }
+function todayKeyStr(){ return new Date().toISOString().slice(0,10); }
+function computeTodayTotal(st){
+  const d = st && st.days && st.days[todayKeyStr()];
+  if(!d || !d.entries) return 0;
+  return d.entries.reduce((a,e)=>a+(e.effective||0),0);
+}
+function writeProfile(st){
+  if(!auth || !auth.currentUser || !db) return Promise.resolve();
+  const u=auth.currentUser;
+  return setDoc(doc(db,"profiles",u.uid), {
+    name: u.displayName || "",
+    goal: st ? (st.goal||2300) : 2300,
+    todayKey: todayKeyStr(),
+    todayTotal: st ? computeTodayTotal(st) : 0,
+    updatedAt: Date.now()
+  }, {merge:true}).catch(e=>console.error("profile write:", e));
+}
+
 window.FB = {
   register(email, pass, name){
     return createUserWithEmailAndPassword(auth, email, pass)
@@ -991,6 +1131,7 @@ window.FB = {
   login(email, pass){ return signInWithEmailAndPassword(auth, email, pass); },
   logout(){ return signOut(auth); },
   email(){ return auth && auth.currentUser ? auth.currentUser.email : ""; },
+  myUid(){ return auth && auth.currentUser ? auth.currentUser.uid : null; },
   saveState(st){
     if(!auth || !auth.currentUser || !db) return;
     const uid  = auth.currentUser.uid;
@@ -1000,9 +1141,34 @@ window.FB = {
       setDoc(doc(db,"users",uid),
         {goal:st.goal, days:st.days, name, updatedAt:st.updatedAt||Date.now()},
         {merge:true}).catch(e=>console.error("save failed:", e));
+      writeProfile(st);
     }, 700);
+  },
+  async findUidByEmail(email){
+    if(!db) return null;
+    const s = await getDoc(doc(db,"emailIndex", emailKey(email)));
+    return s.exists() ? (s.data().uid || null) : null;
+  },
+  addFriend(fuid){
+    return setDoc(doc(db,"users",auth.currentUser.uid), {friends: arrayUnion(fuid)}, {merge:true});
+  },
+  removeFriend(fuid){
+    return updateDoc(doc(db,"users",auth.currentUser.uid), {friends: arrayRemove(fuid)});
+  },
+  watchProfile(uid, cb){
+    return onSnapshot(doc(db,"profiles",uid),
+      s => cb(s.exists() ? s.data() : null),
+      () => cb(null));
   }
 };
+
+function ensureIndex(){
+  if(!auth || !auth.currentUser || !db) return;
+  const u=auth.currentUser;
+  setDoc(doc(db,"emailIndex", emailKey(u.email)),
+    {uid:u.uid, updatedAt:Date.now()}, {merge:true}).catch(e=>console.error("index:", e));
+  writeProfile(null);
+}
 
 if(auth){
   onAuthStateChanged(auth, user=>{
@@ -1010,12 +1176,19 @@ if(auth){
     if(unsub){ unsub(); unsub=null; }
     if(user){
       window.showApp(user.displayName || "друг");
+      ensureIndex();
       const ref = doc(db,"users",user.uid);
       unsub = onSnapshot(ref, snap=>{
-        if(snap.exists()){ window.applyCloudState(snap.data()); }
-        else { setDoc(ref, {goal:2300, days:{}, name:user.displayName||"", updatedAt:Date.now()}).catch(()=>{}); }
+        if(snap.exists()){
+          const d=snap.data();
+          window.applyCloudState(d);
+          window.applyFriends(d.friends || []);
+        } else {
+          setDoc(ref, {goal:2300, days:{}, friends:[], name:user.displayName||"", updatedAt:Date.now()}).catch(()=>{});
+        }
       }, err=>console.error("snapshot error:", err));
     } else {
+      window.applyFriends([]);
       window.showAuth();
     }
   });
