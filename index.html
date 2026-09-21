@@ -169,6 +169,11 @@
     display:flex;align-items:center;justify-content:center;gap:6px}
   .glass-wrap:focus-visible{outline:none}
   .glass-wrap:focus-visible svg{filter:drop-shadow(0 0 0 3px var(--brand-soft))}
+  .undo-btn{position:absolute;left:12px;top:54%;transform:translateY(-50%);z-index:4;
+    width:46px;height:46px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow-sm);
+    display:grid;place-items:center;color:var(--ink-2)}
+  .undo-btn:active{transform:translateY(-50%) scale(.93)}
+  .undo-btn:disabled{opacity:.4}
 
   .ring-wrap{position:relative;width:220px;height:220px;margin:4px auto 2px}
   .ring-wrap svg{transform:rotate(-90deg);display:block}
@@ -486,6 +491,9 @@
         <span class="gc"><span id="cur">0</span> / <span id="goal">2300</span> <span>мл</span></span>
         <span class="gp" id="pct">0%</span>
       </div>
+      <button class="undo-btn" id="undoBtn" aria-label="Відмінити останнє додавання" title="Відмінити останнє">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9h10.5a5 5 0 0 1 0 10H8.5"/><path d="M6.5 5.5 3 9l3.5 3.5"/></svg>
+      </button>
       <div class="hint">◀ свайп по склянці змінює об'єм ▶</div>
 
       <div class="breakdown">
@@ -668,6 +676,16 @@ function removeEntry(i){
 }
 function setGoal(g){ state.goal = g; save(); render(); }
 
+function undoLast(){
+  const d = today();
+  if(!d.entries.length){ toast("Немає що відміняти", false); return; }
+  const e = d.entries.pop();
+  save(); render(); haptic();
+  toast(`Відмінено −${e.ml} мл`, false, ()=>{
+    d.entries.push(e); d.entries.sort((a,b)=>a.t-b.t); save(); render();
+  });
+}
+
 function computeStreak(){
   let n=0; const d=new Date();
   for(let i=0;i<400;i++){
@@ -716,6 +734,7 @@ function render(){
   document.getElementById("bOther").textContent=ot;
 
   document.getElementById("streak").textContent = computeStreak();
+  const ub=document.getElementById("undoBtn"); if(ub) ub.disabled = !day.entries.length;
   document.getElementById("dateLabel").textContent =
     new Date().toLocaleDateString("uk-UA",{weekday:"long",day:"numeric",month:"long"});
 
@@ -821,6 +840,7 @@ function initGlass(){
   });
   document.getElementById("pkMinus").onclick=()=>changePick(-STEP);
   document.getElementById("pkPlus").onclick=()=>changePick(STEP);
+  document.getElementById("undoBtn").onclick=undoLast;
 }
 
 function renderHistory(day){
@@ -871,6 +891,8 @@ function renderChart(){
         <div class="bar ${under?'under':''} ${isToday?'today':''}" style="height:${h}%"></div>
       </div>
       <span class="bar-lbl ${isToday?'on':''}">${dd.toLocaleDateString("uk-UA",{weekday:"short"})}</span>`;
+    col.style.cursor="pointer"; col.title="Змінити кількість";
+    col.onclick=()=>openDayEdit(new Date(dd), todayKey(dd));
     el.appendChild(col);
   });
   document.getElementById("avgLbl").textContent="Сер. "+Math.round(sum/7)+" мл";
@@ -946,6 +968,35 @@ function openCalc(){
     res.textContent=ml+" мл"; return ml; };
   inp.oninput=calc; calc();
   bg.querySelector("#wOk").onclick=()=>{ setGoal(calc()); closeModal(bg); toast("Норму оновлено",true); };
+}
+function openDayEdit(d, key){
+  const day = state.days[key];
+  const cur = day ? dayTotal(day) : 0;
+  let label = d.toLocaleDateString("uk-UA",{weekday:"long",day:"numeric",month:"long"});
+  label = label.charAt(0).toUpperCase()+label.slice(1);
+  const isToday = key===todayKey();
+  const bg = makeModal(`
+    <h3>${isToday?"Сьогодні":esc(label)}</h3>
+    <p>Вкажи, скільки випито цього дня (мл)</p>
+    <div class="field"><input id="dInp" type="number" inputmode="numeric" value="${cur}" min="0" max="10000"><span class="unit">мл</span></div>
+    <button class="btn" id="dOk">Зберегти</button>
+    ${cur?'<button class="btn ghost" id="dClear">Очистити день</button>':''}
+  `);
+  const inp=bg.querySelector("#dInp");
+  bg.querySelector("#dOk").onclick=()=>{ const v=Math.max(0,Math.min(10000,parseInt(inp.value)||0));
+    setDayTotal(key, d, v); closeModal(bg); toast("Збережено", true); };
+  const clr=bg.querySelector("#dClear");
+  if(clr) clr.onclick=()=>{ setDayTotal(key, d, 0); closeModal(bg); toast("День очищено", false); };
+  setTimeout(()=>{ inp.focus(); inp.select(); }, 50);
+}
+function setDayTotal(key, d, total){
+  if(total>0){
+    const t = (d instanceof Date ? d.getTime() : Date.now());
+    state.days[key] = {entries:[{t, ml:total, effective:total, type:"water", manual:true}]};
+  } else {
+    delete state.days[key];
+  }
+  save(); render();
 }
 function openAccount(){
   const email = window.FB ? window.FB.email() : "";
