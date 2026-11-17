@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sipmates — Support</title>
+<style>
+  :root{--bg:#eef6fd;--card:#fff;--ink:#0d2438;--ink2:#42627e;--brand:#0369a1;--line:#dcebf8}
+  @media (prefers-color-scheme:dark){:root{--bg:#081420;--card:#0f2233;--ink:#eaf4fd;--ink2:#a6c1d6;--brand:#7dd3fc;--line:#1e3548}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  main{max-width:760px;margin:0 auto;padding:24px 16px 56px}
+  .card{background:var(--card);border-radius:22px;padding:24px 22px;border:1px solid var(--line)}
+  header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+  .logo{font-weight:800;font-size:20px}
+  .lang button{font:inherit;font-weight:700;padding:8px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer}
+  .lang button[aria-pressed="true"]{color:var(--brand);border-color:var(--brand)}
+  h1{font-size:26px;line-height:1.25;margin:0 0 8px}
+  h2{font-size:18px;margin:26px 0 6px}
+  h3{font-size:16px;margin:18px 0 2px}
+  p,li{color:var(--ink2)}
+  p{margin:4px 0 10px}
+  a{color:var(--brand)}
+  .contact{font-size:18px;font-weight:700}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="logo">💧 Sipmates</div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-l="en">English</button>
+      <button type="button" data-l="uk">Українська</button>
+    </div>
+  </header>
+
+  <div class="card" data-lang="en">
+    <h1>Support</h1>
+    <p>Have a question, found a bug or want to suggest something? Email us:</p>
+    <p class="contact"><a class="mail"></a></p>
+    <p>We reply within 1–2 days. Reports about users are reviewed within 24 hours.</p>
+
+    <h2>FAQ</h2>
+
+    <h3>I forgot my password</h3>
+    <p>On the sign-in screen enter your email and tap “Забули пароль?” (Forgot password). You will receive an email with a reset link. Check your Spam folder too.</p>
+
+    <h3>Reminders don't arrive</h3>
+    <p>Turn them on in the app: Account → Reminders. If that doesn't help, check the permission: iPhone Settings → Sipmates → Notifications.</p>
+
+    <h3>How to add a friend</h3>
+    <p>Friends tab → enter your friend's email → “Запросити” (Invite). Your friend must be registered in Sipmates with that email and accept the invitation.</p>
+
+    <h3>How to report or block a user</h3>
+    <p>Tap “⋯” in a friend's row or in an invitation → “Поскаржитись” (Report) or “Заблокувати” (Block). A blocked person cannot see your progress or send you invitations. You can unblock them in Account.</p>
+
+    <h3>How to change the daily goal</h3>
+    <p>Account → “Змінити денну норму” (Change daily goal). It also offers a calculation based on weight and activity. This is an estimate, not medical advice.</p>
+
+    <h3>How to delete my account</h3>
+    <p>Account → “Видалити акаунт” (Delete account) → enter your password. The account and all its data are deleted permanently. If you cannot sign in, email us from the account's address and we will delete it manually.</p>
+
+    <h3>My data on another phone</h3>
+    <p>Sign in with the same email — your history, goal and settings will sync automatically.</p>
+
+    <p style="margin-top:22px"><a href="privacy.html">Privacy Policy</a></p>
+  </div>
+  <div class="card" data-lang="uk" hidden>
+    <h1>Підтримка</h1>
+    <p>Маєш питання, знайшов помилку чи хочеш щось запропонувати? Напиши нам:</p>
+    <p class="contact"><a class="mail"></a></p>
+    <p>Відповідаємо протягом 1–2 днів. Скарги на користувачів розглядаємо протягом 24 годин.</p>
+
+    <h2>Часті питання</h2>
+
+    <h3>Забув пароль</h3>
+    <p>На екрані входу введи свій email і натисни «Забули пароль?». На пошту прийде лист із посиланням для нового пароля. Перевір також теку «Спам».</p>
+
+    <h3>Не приходять нагадування</h3>
+    <p>Увімкни їх у застосунку: Акаунт → Нагадування. Якщо не допомогло, перевір дозвіл: Налаштування iPhone → Sipmates → Сповіщення.</p>
+
+    <h3>Як додати друга</h3>
+    <p>Вкладка «Друзі» → введи email друга → «Запросити». Друг має бути зареєстрований у Sipmates із цим email і прийняти запрошення.</p>
+
+    <h3>Як поскаржитись на користувача або заблокувати його</h3>
+    <p>У рядку друга чи в запрошенні натисни «⋯» → «Поскаржитись» або «Заблокувати». Заблокована людина не бачить твій прогрес і не може надсилати тобі запрошення. Розблокувати можна в Акаунті.</p>
+
+    <h3>Як змінити денну норму</h3>
+    <p>Акаунт → «Змінити денну норму». Там же є розрахунок за вагою й активністю. Це орієнтир, а не медична порада.</p>
+
+    <h3>Як видалити акаунт</h3>
+    <p>Акаунт → «Видалити акаунт» → введи пароль. Акаунт і всі дані видаляються назавжди. Якщо не можеш увійти — напиши нам з email акаунта, і ми видалимо його вручну.</p>
+
+    <h3>Дані на іншому телефоні</h3>
+    <p>Увійди тим самим email — історія, норма й налаштування підтягнуться самі.</p>
+
+    <p style="margin-top:22px"><a href="privacy.html?lang=uk">Політика приватності</a></p>
+  </div>
+
+</main>
+<script>
+  // Єдине місце для адреси — після купівлі домену замінити тут.
+  var SUPPORT_EMAIL = "sipmates.app@gmail.com";
+  document.querySelectorAll("a.mail").forEach(function(a){ a.href = "mailto:" + SUPPORT_EMAIL; a.textContent = SUPPORT_EMAIL; });
+  function setLang(l){
+    document.documentElement.lang = l;
+    document.querySelectorAll("[data-lang]").forEach(function(c){ c.hidden = c.getAttribute("data-lang") !== l; });
+    document.querySelectorAll(".lang button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-l") === l); });
+  }
+  document.querySelectorAll(".lang button").forEach(function(b){ b.onclick = function(){ setLang(b.getAttribute("data-l")); }; });
+  var q = (location.search.match(/lang=(uk|en)/) || [])[1];
+  setLang(q || "en");   // English is the default; ?lang=uk opens the Ukrainian version
+</script>
+</body>
+</html>
